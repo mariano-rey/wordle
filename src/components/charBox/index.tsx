@@ -1,6 +1,8 @@
+export type CharStatus = "wrong" | "success" | "near";
+
 type Props = {
   value?: string;
-  status?: "wrong" | "success" | "near";
+  status?: CharStatus;
 };
 
 export default function CharBox({ status, value }: Props) {
@@ -15,7 +17,8 @@ export default function CharBox({ status, value }: Props) {
 
   return (
     <div
-      className={`${bgColor} w-12 h-12 flex justify-center items-center rounded font-sans font-bold`}
+      className={`${bgColor} w-12 h-12 flex justify-center items-center rounded font-bold`}
+      data-testid="char_box_container"
     >
       {value}
     </div>
