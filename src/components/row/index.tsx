@@ -1,17 +1,19 @@
-import React from "react";
-import { Row as RowProps } from "../../App";
-import CONSTANTS from "../../constants";
-import CharBox from "../charBox";
+import CONSTANTS from "@/constants";
+import Box from "../box";
+import type { CharStatus } from "../box";
 
-export default function Row({ chars }: Partial<RowProps>) {
-  function renderContent() {
-    const boxes: React.ReactNode[] = [];
-    for (let x = 0; x < CONSTANTS.WORD_LENGTH; x++) {
-      const rowData = chars?.[x] || {};
-      boxes.push(<CharBox key={x} {...rowData} />);
-    }
-    return boxes;
-  }
+export type CharProps = { value: string; status?: CharStatus };
+export type RowProps = {
+  rows: CharProps[];
+};
 
-  return <div className="flex gap-2 p-2">{renderContent()}</div>;
+export default function Row({ rows: chars }: Partial<RowProps>) {
+  return (
+    <div className="flex gap-2 p-2" role="row">
+      {Array.from({ length: CONSTANTS.WORD_LENGTH }, (_, index) => {
+        const rowData = chars?.[index] || {};
+        return <Box key={index} {...rowData} />;
+      })}
+    </div>
+  );
 }

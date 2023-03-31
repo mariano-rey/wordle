@@ -1,8 +1,9 @@
 import randomWord from "random-words";
-import { CharStatus } from "../../components/charBox";
-import CONSTANTS from "../../constants";
 
-export function getRandomWord(size: number = CONSTANTS.WORD_LENGTH): any {
+import { CharStatus } from "@/components/box";
+import CONSTANTS from "@/constants";
+
+export function getRandomWord(size: number = CONSTANTS.WORD_LENGTH): string {
   const word = randomWord({
     exactly: 1,
     formatter: (word) => word.toUpperCase(),
@@ -23,11 +24,11 @@ export function checkCharPosition(
   const indexOf = word.indexOf(char);
 
   if (indexOf === -1) {
-    return "wrong";
+    return CharStatus.WRONG;
   }
   if (indexOf === indexWord) {
-    return "success";
+    return CharStatus.SUCCESS;
   }
 
-  return "near";
+  return CharStatus.NEAR;
 }
